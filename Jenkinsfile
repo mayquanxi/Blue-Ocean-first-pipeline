@@ -3,7 +3,7 @@ pipeline {
     label 'master'
     }
   stages {
-    stage('Build') {
+    stage('Build') {            //use tool nodejs on system configure
       steps {
         nodejs('node') {
           echo 'check node version'
@@ -16,7 +16,7 @@ pipeline {
 
     stage('Test') {
       steps {
-        nodejs('node') {
+        nodejs('node') {            //use tool nodejs on system configure
           echo 'Test expose web html'
           sh 'node ./app.js  & sleep 10'
         }
