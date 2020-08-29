@@ -22,7 +22,11 @@ pipeline {
         echo 'Test expose web html'
         sh 'node ./app.js  & sleep 10'
         echo 'you can access website apps: http://127.0.0.1:3000'
-        input message: 'Click process for continue or abort to quite pipeline', submitter: 'user01, user02, mayquanxi', submitterParameter: 'user_approves'
+        input (
+          message: 'Click process for continue or abort to quite pipeline',
+          submitter: 'user01, user02, mayquanxi',  //submitter for user01,user02, mayquanxi and admin have permission for aproves jobs
+          submitterParameter: 'user_approves'
+        ) 
       }
     }
 
