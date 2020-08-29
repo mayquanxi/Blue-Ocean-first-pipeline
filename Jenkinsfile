@@ -1,26 +1,27 @@
 pipeline {
   agent {
-    docker {
-      image 'node:13'
-      args '-p 3000:3000'
-      label 'host'
+    label 'master'
     }
 
   }
   stages {
     stage('Build') {
       steps {
-        echo 'check node version'
-        sh 'node --version'
-        echo 'install npm'
-        sh 'npm install'
+        nodejs('node') {
+          echo 'check node version'
+          sh 'node --version'
+          echo 'install npm'
+          sh 'npm install'
+        }
       }
     }
 
     stage('Test') {
       steps {
-        echo 'Test expose web html'
-        sh 'node ./app.js  & sleep 10'
+        nodejs('node') {
+          echo 'Test expose web html'
+          sh 'node ./app.js  & sleep 10'
+        }
         echo 'you can access website apps: http://127.0.0.1:3000'
         input (
           message: 'Click process for continue or abort to quite pipeline',
